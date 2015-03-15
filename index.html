@@ -131,7 +131,7 @@
     <br />
     <div class="styled-select">
  <select  id ="selecte" onchange="update(this.value)">
-        <option value="X2009">Budget 2009</option>
+        <option  value="X2009">Budget 2009</option>
         <option value="X2010">Budget 2010</option>
         <option value="X2011"> Budget 2011 </option>
         <option value="X2012" > Budget 2012 </option>
@@ -142,7 +142,7 @@
         <option value="X2011.1">Recette 2011</option>
         <option value="X2012.1">Recette 2012</option>
       </select>
- <br />
+ <br /><br />
   </div>
       </center>
    <div id="info" style="color:#FFF; font-size:20px;width:auto; height:170px;position:absolute;left:10px"> <span  style="color:#42dca3;">Informations sur le club : <br /></span></div>
@@ -156,8 +156,25 @@
     var width  = 850
     var height =650
     
+    var w = window,
+    d = document,
+    e = d.documentElement,
+    g = d.getElementsByTagName('body')[0]
+    
     var svg = d3.select("body").select("#mapp").append("svg").attr("id",chart).attr("width",width).attr("height",height).attr("viewBox","0 0 850 500").attr("preserveAspectRatio","xMidYMid");
-
+    
+    function updateWindow(){
+      if(w.innerWidth < 1200) {
+        x = w.innerWidth || e.clientWidth || g.clientWidth;
+        y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+      }
+      else {
+        x = 850
+        y = 650
+      }
+      svg.attr("width", x).attr("height", y);
+    }
+    window.onresize = updateWindow;
     
     // echelle pour les cercles
     var scalecircle = d3.scale.sqrt().range([0, 15]).domain([0,30])
@@ -294,6 +311,7 @@
          </div>
        <div id="chart" style="text-align:center;">
        <script>
+         
          var liste, texte;
          liste = document.getElementById("selecte2");
          texte = liste.options[liste.selectedIndex].text;
@@ -320,10 +338,14 @@
          .orient("left")
          .ticks(10);
       
-         
-         var svg2 = d3.select("body").select("#chart").append("svg").attr("id",chart).attr("width",width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g")
-          .attr("transform", "translate(" + margin.left + "," + margin.top + ")").attr("viewBox","0 0 960 500").attr("preserveAspectRatio","xMidYMid");
-      
+         var svg2 = d3.select("body").select("#chart").append("svg")
+         .attr("id",chart)
+         .attr("width",width + margin.left + margin.right)
+         .attr("height", height + margin.top + margin.bottom)
+         .append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")").attr("viewBox","0 0 960 500").attr("preserveAspectRatio","xMinYMi meet");
+          
+
           var Data = []
           
          d3.csv("bar-data.csv",function(error, data) {
@@ -450,6 +472,8 @@
            });
            }
 
+
+
         </script>
 
        </div>
@@ -472,8 +496,6 @@
     <!-- Plugin JavaScript -->
     <script src="js/jquery.easing.min.js"></script>
 
-    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="js/grayscale.js"></script>
