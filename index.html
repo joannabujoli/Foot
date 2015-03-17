@@ -7,22 +7,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Tcherina, Olivier, Joanna">
+      
       <script src="http://d3js.org/d3.v3.min.js"></script>
       <script src="http://d3js.org/queue.v1.min.js"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+      <script src="js/liquidFillGauge.js" language="JavaScript"></script>
       <script src="//code.jquery.com/jquery-1.10.2.js"></script>
       <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+        
+        <style>
+          .liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
+          </style>
+        
     <title>Ligue 1 - Evolution des principaux clubs</title>
+    
     <link rel="icon" href="img/ballon.png" />
-    <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
     <link href="css/grayscale.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -32,7 +35,7 @@
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-    <!-- Navigation -->
+
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -41,10 +44,10 @@
                 </button>
                     </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
+
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
-                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+          
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
@@ -69,14 +72,20 @@
                     <li>
                       <a class="page-scroll" href="#chart">BAR CHART </a>
                     </li>
+                    <li style="padding-top:13px">
+                      <img src="img/ballon.png" width="20px" height="20px"/>
+                    </li>
+                    <li>
+                      <a class="page-scroll" href="#gauge">LIQUID GAUGE </a>
+                    </li>
+
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
+
         </div>
-        <!-- /.container -->
+
     </nav>
 
-    <!-- Intro Header -->
     <header class="intro">
         <div class="intro-body">
             <div class="container">
@@ -93,7 +102,7 @@
         </div>
     </header>
 
-    <!-- About Section -->
+
     <section id="about" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
@@ -104,8 +113,9 @@
             </div>
         </div>
     </section>
+    
 <HR WIDTH=100% ALIGN="center" size=1>
-    <!-- Contact Section -->
+
     <section id="contact" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
@@ -119,14 +129,16 @@
                                       <li>
                         <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
                     </li>
-                   
                 </ul>
+                
                 <br /><br />
+                
             </div>
         </div>
     </section>
+    
 <HR WIDTH=100% ALIGN="center" size=1>
-    <!-- Map Section -->
+
    <center>
     <br />
     <div class="styled-select">
@@ -145,143 +157,18 @@
  <br /><br />
   </div>
       </center>
+   
    <div id="info" style="color:#FFF; font-size:20px;width:auto; height:170px;position:absolute;left:10px"> <span  style="color:#42dca3;">Informations sur le club : <br /></span></div>
+   
    <br />
    
  <div style="text-align:center;" id="mapp">
    
-    <script>
-    
-    var margin = 20
-    var width  = 850
-    var height =650
-    
-    var w = window,
-    d = document,
-    e = d.documentElement,
-    g = d.getElementsByTagName('body')[0]
-    
-    var svg = d3.select("body").select("#mapp").append("svg").attr("id",chart).attr("width",width).attr("height",height).attr("viewBox","0 0 850 500").attr("preserveAspectRatio","xMidYMid");
-    
-    function updateWindow(){
-      if(w.innerWidth < 1200) {
-        x = w.innerWidth || e.clientWidth || g.clientWidth;
-        y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-      }
-      else {
-        x = 850
-        y = 650
-      }
-      svg.attr("width", x).attr("height", y);
-    }
-    window.onresize = updateWindow;
-    
-    // echelle pour les cercles
-    var scalecircle = d3.scale.sqrt().range([0, 15]).domain([0,30])
-    
-    // echelle de couleur aussi facile
-    var scalecolor = d3.scale.linear().range(["#fff","#f22"]).domain([0,30])
-    
-    // projection !
-    var projection = d3.geo.mercator()
-    .scale(width*3)
-    .center([2,45.2])
-    .translate([width / 2, height / 2]);
-    
-    
-    var aspect = 850 / 650,
-    chart = $("#chart");
-    $(window).on("resize", function() {
-                 var targetWidth = chart.parent().width();
-                 chart.attr("width", targetWidth);
-                 chart.attr("height", targetWidth / aspect);
-                 // update projection
-                 projection
-                 .translate([targetWidth / 2, (height/aspect) / 2])
-                 .scale(width*3);
-                 
-                 });
-                 
-                 // la magie de d3 retourne une fonction de génération de path
-                 // prendra en entrée un bout de geojson et le dessinera en utilisant la projection
-                 var path = d3.geo.path().projection(projection)
-                 
-                 var Data = []
-                 
-                 // defer, await
-                 queue()
-                 .defer(d3.json, 'departements.geojson')
-                 .defer(d3.csv, 'donnees_ligue.csv') // geojson points
-                 .await(function(error,departements,data){
-                        // une ligne de code pour dessiner le fond de carte cf path()
-                        svg.append("g").attr("id","dep").selectAll("path").data(departements.features).enter().append("path").attr("d",path).style("fill","#FFF")
-                        
-                        Data = data
-                        
-                        
-                        var circles = svg.selectAll("circle").data(data)
-                        
-                        
-                        circles.enter().append("circle")
-                        circles.enter().append("circle")
-                        .attr("cx",function(d){var p = projection([+d.Longitude,+d.Latitude]); return p[0]})
-                        .attr("cy",function(d){var p = projection([+d.Longitude,+d.Latitude]); return p[1]})
-                        .attr("r",function(d){if(d.X2013==":" || d.X2013=="0" ){return 5} else{return scalecircle(d.X2013)}})
-                        
-                        .style("fill",function(d){if(d.X2013==":"  || d.X2013=="0" ){return "#555"}else{return scalecolor(d.X2013)}})
-                        .style("stroke",function(d){if(d.X2013==":" || d.X2013=="0"){ return"#000" }else{ return d3.rgb(scalecolor(d.X2013)).darker()}})
-                        .on("click", mouseClick);
-                       
-                        
-                        function mouseClick(data) {
-                        var liste, texte;
-                        liste = document.getElementById("selecte");
-                        texte = liste.options[liste.selectedIndex].text;
-                        var valeur;
-                        valeur = document.getElementById("selecte").options[document.getElementById('selecte').selectedIndex].value;
-                        d3.select("body").select("#info").selectAll("p").remove();
-                        d3.select("body").select("#info").append("p").html( function(d){
-                                                                           if(data[valeur]=="0"){
-                                                                           return data.Club + " <br /> Date cr&eacute;ation  : " + data.Date + "<br />" + "Stade : " + data.Stade + "<br /> " + texte +" : NC"
-                                                                           } else {
-                                                                           return data.Club + " <br /> Date cr&eacute;ation  : " + data.Date + "<br />" + "Stade : " + data.Stade +  "<br /> " + texte + " : " + data[valeur] + " millions"
-                                                                           }
-                                                                           });
-                        }
-                        
-                        var labels = svg.selectAll("text").data(data)
-                        labels.enter().append("text")
-                        .attr("x",function(d){var p = projection([+d.Longitude,+d.Latitude]); return p[0]-15})
-                        .attr("y",function(d){var p = projection([+d.Longitude,+d.Latitude]); return p[1]-10})
-                        .html(function(d){return d.Club})
-                        .style("text")
-                        
-                        
-                        })
-                        
-                        
-                        
-                        var update = function(feature){
-                          var circles = d3.selectAll("circle")
-                          // d3.rgb("#ag4444").darker()
-                          circles.transition().duration(2000).ease(d3.ease("quad"))
-                          .attr("cx",function(d){var p = projection([+d.Longitude,+d.Latitude]); return p[0]})
-                          .attr("cy",function(d){var p = projection([+d.Longitude,+d.Latitude]); return p[1]})
-                          .attr("r",function(d){if(d[feature]==":"  || d[feature]=="0"){return "5" }else{return scalecircle(d[feature])}})
-                          .style("fill",function(d){if(d[feature]==":"  || d[feature]=="0"){return "#555" }else{return scalecolor(d[feature])}})
-                          .style("stroke",function(d){if(d[feature]==":"  || d[feature]=="0"){return "#555"}else{return  d3.rgb(scalecolor(d[feature])).darker() }})
-                          .on("click", mouseClick);
-                                                          
-                        }
-    
-    
-    
-    
-      </Script>
+ <script src="js/card.js"></script>
     
 </div>
  <HR WIDTH=100% ALIGN="center" size=1>
- <!-- Contact Section -->
+
  <section  class="container content-section text-center">
        <h2>Bar Chart  </h2>
        <img src="img/ballon.png" width="20px" height="20px"/>
@@ -289,6 +176,7 @@
        <div id="info2" style="color:#FFF; font-size:20px;width:auto; height:370px;position:absolute;left:10px;"> <span  style="color:#42dca3;">Informations sur le club : <br /></span></div>
        <div class="styled-select">
        </div>
+       
        <div class="styled-select">
          <select  id ="selecte1" onchange="update2(this.value)">
            <option class="select-dash" disabled="disabled">Ann&eacute;es</option>
@@ -298,6 +186,7 @@
            <option value="2012" >2012</option>
            <option value="2013" selected="selected">2013</option>
          </select>
+         
          <select  id ="selecte2" onchange="update2(this.value)">
            <option class="select-dash" disabled="disabled">Variables </option>
            <option value="points" selected="selected">Points</option>
@@ -308,198 +197,127 @@
               <option value="marques">Nb buts marqu&eacute;s</option>
                <option value="encaisses">Nb buts encaiss&eacute;s</option>
          </select>
+         
          </div>
        <div id="chart" style="text-align:center;">
-       <script>
-         
-         var liste, texte;
-         liste = document.getElementById("selecte2");
-         texte = liste.options[liste.selectedIndex].text;
-         
-         var liste1, texte1;
-         liste1 = document.getElementById("selecte1");
-         texte1 = liste.options[liste.selectedIndex].text;
-
-
-         var margin = {top: 20, right: 20, bottom: 115, left: 100},
-         width = 960 - margin.left - margin.right,
-         height = 600 - margin.top - margin.bottom;
-         
-         var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
-         
-         var y = d3.scale.linear().range([height, 0]);
-         
-         var xAxis = d3.svg.axis()
-         .scale(x)
-         .orient("bottom");
-         
-         var yAxis = d3.svg.axis()
-         .scale(y)
-         .orient("left")
-         .ticks(10);
-      
-         var svg2 = d3.select("body").select("#chart").append("svg")
-         .attr("id",chart)
-         .attr("width",width + margin.left + margin.right)
-         .attr("height", height + margin.top + margin.bottom)
-         .append("g")
-          .attr("transform", "translate(" + margin.left + "," + margin.top + ")").attr("viewBox","0 0 960 500").attr("preserveAspectRatio","xMidYMid");
-          
-
-          var Data = []
-          
-         d3.csv("bar-data.csv",function(error, data) {
-                Data = data
-                
-                data.forEach(function(d) {
-                             d.points2013 = +d.points2013;
-                             });
-                
-                x.domain(data.map(function(d) { return d.club; }));
-                y.domain([0, d3.max(data, function(d) { return d.points2013+10; })]);
-                
-                svg2.append("g")
-                .attr("class", "x axis")
-                .attr("transform", "translate(0," + height + ")")
-                .call(xAxis)
-                .selectAll("text")
-                .style("fill","#fff")
-                .style("text-anchor", "end")
-                .attr("dx", "-.4em")
-                .attr("dy", ".33em")
-                .attr("transform", "rotate(-90)" );
-                
-                svg2.append("g")
-                .attr("class", "y axis")
-                .style("fill","#fff")
-                .call(yAxis)
-                .append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 8)
-                .attr("dy", ".90em")
-                .style("text-anchor", "end")
-                .text(texte) ;
-                
-                svg2.selectAll(".bar")
-                .data(data)
-                .enter().append("rect")
-                .attr("class", "bar")
-                .attr("x", function(d) { return x(d.club); })
-                .attr("width", x.rangeBand())
-                .attr("y", function(d) { return y(d.points2013); })
-                .attr("height", function(d) { return height - y(d.points2013); })
-                .on("click", clickBar);
-                
-                function clickBar(data) {
-                d3.select("body").select("#info2").selectAll("p").remove();
-                d3.select("body").select("#info2").append("p").html( function(d){
-                                                                    return data.club + " : " + data.points2013;
-                                                                    });
-                }
-
-                });
-
-  var update2 = function(feature){
-    
-    var liste, texte,valeur, nb;
-    liste = document.getElementById("selecte2");
-    texte = liste.options[liste.selectedIndex].text;
-    valeur = document.getElementById("selecte1").options[document.getElementById('selecte1').selectedIndex].value;
-    
-    var liste1, texte1;
-    liste1 = document.getElementById("selecte1");
-    texte1 = liste.options[liste.selectedIndex].value;
-    nb = texte1+valeur;
-    
-    d3.csv("bar-data.csv", function(error, data) {
-           data.forEach(function(d) {
-                        d[nb] = +d[nb];
-                      });
-           
-                 x.domain(data.map(function(d) { return d.club; }));
-                 y.domain([0, d3.max(data, function(d) { return d[nb]+10; })]);
-           
-           svg2.selectAll("g.x.axis")
-            .style("fill","#fff")
-           .attr("transform", "translate(0," + height + ")")
-           .call(xAxis)
-           .selectAll("text")
-           .style("text-anchor", "end")
-           .attr("dx", "-.4em")
-           .attr("dy", ".33em")
-           .attr("transform", "rotate(-90)" );
-           
-           svg2.select(".y.axis").remove();
-           svg2.append("g")
-           .attr("class", "y axis")
-           .style("fill","#fff")
-           .call(yAxis)
-           .append("text")
-           .attr("transform", "rotate(-90)")
-           .attr("y", 8)
-           .attr("dy", ".90em")
-           .style("text-anchor", "end")
-           .text(texte) ;
-           
-        var  rects = d3.selectAll("rect")
-        rects.transition().duration(2000).ease(d3.ease("quad"))
-          .attr("class", "bar")
-          .attr("x", function(d) { return x(d.club); })
-          .attr("width", x.rangeBand())
-          .attr("y", function(d) { return y(d[nb]); })
-          .attr("height", function(d) { return height - y(d[nb])})
-           
-           
-           svg2.selectAll(".bar")
-          .on("click", clickBar);
-          
-           function clickBar(data) {
-           var liste, texte;
-           liste = document.getElementById("selecte2");
-           texte = document.getElementById("selecte2").options[document.getElementById('selecte2').selectedIndex].value;
-           var valeur;
-          
-           valeur = document.getElementById("selecte1").options[document.getElementById('selecte1').selectedIndex].value;
-           valeur = texte+valeur;
-           
-           d3.select("body").select("#info2").selectAll("p").remove();
-           d3.select("body").select("#info2").append("p").html( function(d){
-                                                               return data.club + " : " + data[valeur];
-                                                               });
-           }
-
-           
-           });
-           }
-
-        </script>
+       <script src="js/barchart.js"></script>
 
        </div>
       <br /><br />
  </section>
+ 
+ <HR WIDTH=100% ALIGN="center" size=1>
+ 
+ <section  class="container content-section text-center">
+   <h2>LIQUID FILL GAUGE  <br /> sur un maximum de <br /> 51 086 euros </h2>
+   <img src="img/ballon.png" width="20px" height="20px"/>
+   <br /><br />
+   <div id="info3" style="color:#FFF; font-size:20px;width:auto; height:370px;position:absolute;left:10px;"> <span  style="color:#42dca3;">Informations sur le club : <br /><br /></span></div>
+   
+ <div class="styled-select">
+ <select  id ="selecte3" onchange="update3(this.value)">
+   <option  value="Affluence2009">Afflluence 2009</option>
+   <option value="Affluence2010">Afflluence 2010</option>
+   <option value="Affluence2011"> Afflluence 2011 </option>
+   <option value="Affluence2012" > Afflluence  2012 </option>
+   <option value="Affluence2013" selected="selected">Afflluence 2013</option>
+ </select>
+<select  id ="selecte_affluence" onchange="update3(this.value)">
+  <script>
+    var Data = []
+    
+    d3.csv("donnees_ligue.csv",function(error, data) {
+           Data = data
+           var min = 1,
+           max = 31,
+           select = document.getElementById('selecte_affluence');
 
-    <!-- Footer -->
+           data.forEach(function(d) {
+                        var opt = document.createElement('option');
+                        opt.value = d.Club
+                        opt.innerHTML = d.Club
+                        select.appendChild(opt);
+
+                        });
+           });
+           
+   var update3 = function(feature){
+     d3.select("#fillgauge2").select("g").remove();
+     var liste, texte,val;
+     liste = document.getElementById("selecte3");
+     texte = document.getElementById("selecte3").options[document.getElementById('selecte3').selectedIndex].value;
+     val = liste.options[liste.selectedIndex].text;
+     var liste2, texte2;
+     liste2= document.getElementById("selecte_affluence");
+     texte2 = document.getElementById("selecte_affluence").options[document.getElementById('selecte_affluence').selectedIndex].value;
+     d3.csv("donnees_ligue.csv",function(error, data) {
+            Data = data
+            nombreA = 0
+             data.forEach(function(d) {
+                          console.log("affluence " + texte2)
+                          if(d.Club== texte2){
+                            nombreA= d[texte]
+                            var config1 = liquidFillGaugeDefaultSettings();
+                          config1.circleColor = "#42dca3";
+                          config1.textColor = "#FF4444";
+                          config1.waveTextColor = "#0BDE91";
+                          config1.waveColor = "#A5DFC9";
+                            config1.circleThickness = 0.3;
+                            config1.textVertPosition = 0.3;
+                            config1.waveAnimateTime = 1000;
+                            var nb = (d[texte]/51086)*100
+                            loadLiquidFillGauge("fillgauge2", nb, config1);
+                          
+                          d3.select("body").select("#info3").selectAll("p").remove();
+                          d3.select("body").select("#info3").append("p").html( function(d){
+                                                                              return val + " du club <br />" + texte2 + " " +  " : " +  nombreA + " euros";
+                                                                              });
+
+                          
+                          }
+              })
+            })
+      
+   }
+  </script>
+</select>
+ <br /><br />
+ </div>
+ </center>
+ 
+ <br />
+ 
+ <div style="text-align:center;" id="gauge">
+   
+    <svg id="fillgauge2" width="50%" height="300"></svg>
+    <script>var config1 = liquidFillGaugeDefaultSettings();
+      config1.circleColor = "#42dca3";
+      config1.textColor = "#0B4F36";
+      config1.waveTextColor = "#0B4F36";
+      config1.waveColor = "#A5DFC9";
+      config1.circleThickness = 0.3;
+      config1.textVertPosition = 0.3;
+      config1.waveAnimateTime = 1000;
+      loadLiquidFillGauge("fillgauge2", 88.90, config1);
+      d3.select("body").select("#info3").selectAll("p").remove();
+      d3.select("body").select("#info3").append("p").html( function(d){
+                                                          return "Affluence 2013 du club <br /> Olympique Lyonnais  : 34414 euros";
+                                                          });
+
+      </script>
+ </div>
+
     <footer>
         <div class="container text-center">
             <p>Copyright &copy; Joanna B. 2015</p>
         </div>
     </footer>
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
-    <!-- Plugin JavaScript -->
     <script src="js/jquery.easing.min.js"></script>
-
-    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
-
-    <!-- Custom Theme JavaScript -->
     <script src="js/grayscale.js"></script>
 
 </body>
-
 </html>

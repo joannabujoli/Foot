@@ -42,7 +42,7 @@ html {
 }
 
 .styled-select select {
-   background: transparent;
+   background: #2E2E2E;
    width: 268px;
    padding: 5px;
    font-size: 16px;
@@ -50,7 +50,7 @@ html {
    border: 1;
    border-radius: 0;
    height: 34px;
-
+  color:#888;
    }
 
 h1,
