@@ -210,7 +210,7 @@
  <HR WIDTH=100% ALIGN="center" size=1>
  
  <section  class="container content-section text-center">
-   <h2>Pourcentage de l'affluence d'un club <br /> sur un maximum de <br /> 51 086 euros </h2>
+   <h2>Pourcentage de l'affluence d'un club <br /> sur un maximum de <br /> 51 086 places</h2>
    <img src="img/ballon.png" width="20px" height="20px"/>
    <br /><br />
    <div id="info3" style="color:#FFF; font-size:20px;width:auto; height:370px;position:absolute;left:10px;"> <span  style="color:#42dca3;">Informations sur le club : <br /><br /></span></div>
@@ -271,7 +271,7 @@
                           
                           d3.select("body").select("#info3").selectAll("p").remove();
                           d3.select("body").select("#info3").append("p").html( function(d){
-                                                                              return val + " du club <br />" + texte2 + " " +  " : " +  nombreA + " euros";
+                                                                              return val + " du club <br />" + texte2 + " " +  " : " +  nombreA + " places";
                                                                               });
 
                           
@@ -302,7 +302,7 @@
       loadLiquidFillGauge("fillgauge2", 88.90, config1);
       d3.select("body").select("#info3").selectAll("p").remove();
       d3.select("body").select("#info3").append("p").html( function(d){
-                                                          return "Affluence 2013 du club <br /> Olympique Lyonnais  : 34414 euros";
+                                                          return "Affluence 2013 du club <br /> Olympique Lyonnais  : 34 414 places";
                                                           });
 
       </script>
