@@ -76,7 +76,7 @@
                       <img src="img/ballon.png" width="20px" height="20px"/>
                     </li>
                     <li>
-                      <a class="page-scroll" href="#gauge">AFFLUENCE  </a>
+                      <a class="page-scroll" href="#gauge">POURCENTAGE MATCH   </a>
                     </li>
 
                 </ul>
@@ -192,9 +192,7 @@
            <option class="select-dash" disabled="disabled">Variables </option>
            <option value="points" selected="selected">Points</option>
             <option value="joues">Nb matchs jou&eacute;s</option>
-           <option value="gagnes">Nb matchs gagn&eacute;s</option>
-            <option value="nuls">Nb matchs nuls</option>
-             <option value="perdus">Nb matchs perdus</option>
+           <option value="Affluence">Affluence</option>
               <option value="marques">Nb buts marqu&eacute;s</option>
                <option value="encaisses">Nb buts encaiss&eacute;s</option>
          </select>
@@ -210,24 +208,24 @@
  <HR WIDTH=100% ALIGN="center" size=1>
  
  <section  class="container content-section text-center">
-   <h2>Pourcentage de l'affluence d'un club <br /> sur un maximum de <br /> 51 086 places</h2>
+   <h2>Pourcentage des matchs jou&eacute;s d'un club</h2>
    <img src="img/ballon.png" width="20px" height="20px"/>
    <br /><br />
    <div id="info3" style="color:#FFF; font-size:20px;width:auto; height:370px;position:absolute;left:10px;"> <span  style="color:#42dca3;">Informations sur le club : <br /><br /></span></div>
    
  <div class="styled-select">
  <select  id ="selecte3" onchange="update3(this.value)">
-   <option  value="Affluence2009">Afflluence 2009</option>
-   <option value="Affluence2010">Afflluence 2010</option>
-   <option value="Affluence2011"> Afflluence 2011 </option>
-   <option value="Affluence2012" > Afflluence  2012 </option>
-   <option value="Affluence2013" selected="selected">Afflluence 2013</option>
+   <option  value="2009"> 2009</option>
+   <option value="2010">2010</option>
+   <option value="2011"> 2011 </option>
+   <option value="2012" >  2012 </option>
+   <option value="2013" selected="selected"> 2013</option>
  </select>
 <select  id ="selecte_affluence" onchange="update3(this.value)">
   <script>
     var Data = []
     
-    d3.csv("donnees_ligue.csv",function(error, data) {
+    d3.csv("bar-data.csv",function(error, data) {
            Data = data
            var min = 1,
            max = 31,
@@ -235,15 +233,17 @@
 
            data.forEach(function(d) {
                         var opt = document.createElement('option');
-                        opt.value = d.Club
-                        opt.innerHTML = d.Club
+                        opt.value = d.club
+                        opt.innerHTML = d.club
                         select.appendChild(opt);
 
                         });
            });
            
    var update3 = function(feature){
-     d3.select("#fillgauge2").select("g").remove();
+     d3.select("#fillgauge2").selectAll("g").remove();
+      d3.select("#fillgauge3").selectAll("g").remove();
+       d3.select("#fillgauge4").selectAll("g").remove();
      var liste, texte,val;
      liste = document.getElementById("selecte3");
      texte = document.getElementById("selecte3").options[document.getElementById('selecte3').selectedIndex].value;
@@ -251,13 +251,14 @@
      var liste2, texte2;
      liste2= document.getElementById("selecte_affluence");
      texte2 = document.getElementById("selecte_affluence").options[document.getElementById('selecte_affluence').selectedIndex].value;
-     d3.csv("donnees_ligue.csv",function(error, data) {
+     d3.csv("bar-data.csv",function(error, data) {
             Data = data
-            nombreA = 0
+            var nombreA, nombreB, nombreC
              data.forEach(function(d) {
-                          console.log("affluence " + texte2)
-                          if(d.Club== texte2){
-                            nombreA= d[texte]
+                          if(d.club== texte2){
+                          nombreA= "gagnes"+texte
+                          nombreB = "nuls"+texte
+                          nombreC = "perdus"+texte
                             var config1 = liquidFillGaugeDefaultSettings();
                           config1.circleColor = "#42dca3";
                           config1.textColor = "#0B4F36";
@@ -266,14 +267,37 @@
                             config1.circleThickness = 0.3;
                             config1.textVertPosition = 0.3;
                             config1.waveAnimateTime = 1000;
-                            var nb = (d[texte]/51086)*100
-                            loadLiquidFillGauge("fillgauge2", nb, config1);
-                          
+                            var nbA = (d[nombreA]/38)*100
+                            loadLiquidFillGauge("fillgauge2", nbA, config1);
+                          nbA = d[nombreA]
+                          var config3 = liquidFillGaugeDefaultSettings();
+                          config3.circleColor = "#EECD3D";
+                          config3.textColor = "#867218";
+                          config3.waveTextColor = "#867218";
+                          config3.waveColor = "#E0D5A3";
+                          config3.circleThickness = 0.3;
+                          config3.textVertPosition = 0.3;
+                          config3.waveAnimateTime = 1000;
+                          var nbB = (d[nombreB]/38)*100
+                          loadLiquidFillGauge("fillgauge3", nbB, config3);
+                          nbB = d[nombreB]
+                          var config4 = liquidFillGaugeDefaultSettings();
+                          config4.circleColor = "#C91B58";
+                          config4.textColor = "#4F0B23";
+                          config4.waveTextColor = "#4F0B23";
+                          config4.waveColor = "#E4A0B8";
+                          config4.circleThickness = 0.3;
+                          config4.textVertPosition = 0.3;
+                          config4.waveAnimateTime = 1000;
+                          var nbC = (d[nombreC]/38)*100
+                          loadLiquidFillGauge("fillgauge4", nbC, config4);
+                          nbC = d[nombreC]
                           d3.select("body").select("#info3").selectAll("p").remove();
                           d3.select("body").select("#info3").append("p").html( function(d){
-                                                                              return val + " du club <br />" + texte2 + " " +  " : " +  nombreA + " places";
+                                                                              return "Resultats 2013 du club " + texte2 + " : <br /> <p><span style=\"color:#42dca3;\"> Nb match gagnés: " + nbA+ "</<span><br /> <span style=\"color:#EECD3D;\"> Nb match nuls: " + nbB + " </span><br /> <span style=\"color:#C91B58;\"> Nb match perdus: " + nbC + " </span></p> ";
                                                                               });
 
+                       
                           
                           }
               })
@@ -289,8 +313,9 @@
  <br />
  
  <div style="text-align:center;" id="gauge">
-   
-    <svg id="fillgauge2" width="50%" height="300"></svg>
+  <svg id="fillgauge2" width="20%" height="300"></svg>
+   <svg id="fillgauge3" width="20%" height="300"></svg>
+   <svg id="fillgauge4" width="20%" height="300"></svg>
     <script>var config1 = liquidFillGaugeDefaultSettings();
       config1.circleColor = "#42dca3";
       config1.textColor = "#0B4F36";
@@ -299,10 +324,28 @@
       config1.circleThickness = 0.3;
       config1.textVertPosition = 0.3;
       config1.waveAnimateTime = 1000;
-      loadLiquidFillGauge("fillgauge2", 88.90, config1);
+      loadLiquidFillGauge("fillgauge2", 71.05, config1);
+      var config3 = liquidFillGaugeDefaultSettings();
+      config3.circleColor = "#EECD3D";
+      config3.textColor = "#867218";
+      config3.waveTextColor = "#867218";
+      config3.waveColor = "#E0D5A3";
+      config3.circleThickness = 0.3;
+      config3.textVertPosition = 0.3;
+      config3.waveAnimateTime = 1000;
+      loadLiquidFillGauge("fillgauge3", 21.05, config3);
+      var config4 = liquidFillGaugeDefaultSettings();
+      config4.circleColor = "#C91B58";
+      config4.textColor = "#4F0B23";
+      config4.waveTextColor = "#4F0B23";
+      config4.waveColor = "#E4A0B8";
+      config4.circleThickness = 0.3;
+      config4.textVertPosition = 0.3;
+      config4.waveAnimateTime = 1000;
+      loadLiquidFillGauge("fillgauge4", 7.89, config4);
       d3.select("body").select("#info3").selectAll("p").remove();
       d3.select("body").select("#info3").append("p").html( function(d){
-                                                          return "Affluence 2013 du club <br /> Olympique Lyonnais  : 34 414 places";
+                                                          return "Resultats 2013 du club PSG  : <br /> <p><span style=\"color:#42dca3;\"> Nb match gagnés: 27</<span><br /> <span style=\"color:#EECD3D;\"> Nb match nuls: 8</span><br /> <span style=\"color:#C91B58;\"> Nb match perdus: 3</span></p> ";
                                                           });
 
       </script>
