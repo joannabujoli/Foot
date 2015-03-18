@@ -2,25 +2,8 @@ var margin = 20
 var width  = 850
 var height =650
 
-var w = window,
-d = document,
-e = d.documentElement,
-g = d.getElementsByTagName('body')[0]
-
 var svg = d3.select("body").select("#mapp").append("svg").attr("id",chart).attr("width",width).attr("height",height).attr("viewBox","0 0 850 500").attr("preserveAspectRatio","xMidYMid");
 
-function updateWindow(){
-  if(w.innerWidth < 1200) {
-    x = w.innerWidth || e.clientWidth || g.clientWidth;
-    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-  }
-  else {
-    x = 850
-    y = 650
-  }
-  svg.attr("width", x).attr("height", y);
-}
-window.onresize = updateWindow;
 
 // echelle pour les cercles
 var scalecircle = d3.scale.sqrt().range([0, 15]).domain([0,30])
@@ -41,12 +24,17 @@ $(window).on("resize", function() {
              var targetWidth = chart.parent().width();
              chart.attr("width", targetWidth);
              chart.attr("height", targetWidth / aspect);
-             projection.translate([targetWidth / 2, (height/aspect) / 2]) .scale(width*3);
+             // update projection
+             projection
+             .translate([targetWidth / 2, (height/aspect) / 2])
+             .scale(width*3);
              
              });
 
-
+// la magie de d3 retourne une fonction de génération de path
+// prendra en entrée un bout de geojson et le dessinera en utilisant la projection
 var path = d3.geo.path().projection(projection)
+
 var Data = []
 
 // defer, await
@@ -57,13 +45,13 @@ queue()
        // une ligne de code pour dessiner le fond de carte cf path()
        svg.append("g").attr("id","dep").selectAll("path").data(departements.features).enter().append("path").attr("d",path).style("fill","#FFF")
        
+       console.log(data)
        Data = data
        
        
        var circles = svg.selectAll("circle").data(data)
        
        
-       circles.enter().append("circle")
        circles.enter().append("circle")
        .attr("cx",function(d){var p = projection([+d.Longitude,+d.Latitude]); return p[0]})
        .attr("cy",function(d){var p = projection([+d.Longitude,+d.Latitude]); return p[1]})
@@ -101,14 +89,16 @@ queue()
        })
 
 
+
 var update = function(feature){
-  var circles = d3.selectAll("circle")
+  var circles = d3.select("#mapp").selectAll("circle")
+  // d3.rgb("#ag4444").darker()
   circles.transition().duration(2000).ease(d3.ease("quad"))
   .attr("cx",function(d){var p = projection([+d.Longitude,+d.Latitude]); return p[0]})
   .attr("cy",function(d){var p = projection([+d.Longitude,+d.Latitude]); return p[1]})
   .attr("r",function(d){if(d[feature]==":"  || d[feature]=="0"){return "5" }else{return scalecircle(d[feature])}})
   .style("fill",function(d){if(d[feature]==":"  || d[feature]=="0"){return "#555" }else{return scalecolor(d[feature])}})
   .style("stroke",function(d){if(d[feature]==":"  || d[feature]=="0"){return "#555"}else{return  d3.rgb(scalecolor(d[feature])).darker() }})
-  .on("click", mouseClick);
-  
+
 }
+
