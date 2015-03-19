@@ -118,18 +118,23 @@
     <br />
     <div class="styled-select" id="carte">
       <h2>BUDGETS ET RECETTES SPONSORING </h2>
- <select  id ="selecte" onchange="update(this.value)">
-        <option  value="X2009">Budget 2009</option>
-        <option value="X2010">Budget 2010</option>
-        <option value="X2011"> Budget 2011 </option>
-        <option value="X2012" > Budget 2012 </option>
-        <option value="X2013" selected="selected">Budget 2013</option>
-        <option class="select-dash" disabled="disabled">----</option>
-        <option value="X2009.1">Recette 2009</option>
-        <option value="X2010.1">Recette 2010</option>
-        <option value="X2011.1">Recette 2011</option>
-        <option value="X2012.1">Recette 2012</option>
-      </select>
+ <div class="styled-select">
+   <select  id ="selecte" onchange="update(this.value)">
+     <option class="select-dash" disabled="disabled">Ann&eacute;es</option>
+     <option value="2009" >2009</option>
+     <option value="2010" >2010</option>
+     <option value="2011">2011</option>
+     <option value="2012" >2012</option>
+     <option value="2013" selected="selected">2013</option>
+   </select>
+   
+   <select  id ="selecte_br" onchange="update(this.value)">
+     <option class="select-dash" disabled="disabled">Budget/Recette</option>
+     <option value="budget" selected="selected">Budget  </option>
+     <option value="recette">Recette</option>
+   </select>
+   
+ </div>
  <br /><br />
   </div>
       </center>

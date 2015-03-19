@@ -55,25 +55,29 @@ queue()
        circles.enter().append("circle")
        .attr("cx",function(d){var p = projection([+d.Longitude,+d.Latitude]); return p[0]})
        .attr("cy",function(d){var p = projection([+d.Longitude,+d.Latitude]); return p[1]})
-       .attr("r",function(d){if(d.X2013==":" || d.X2013=="0" ){return 5} else{return scalecircle(d.X2013)}})
+       .attr("r",function(d){if(d[Budget2013]==":" || d[Budget2013]=="0" ){return 5} else{return scalecircle(d[Budget2013])}})
        
-       .style("fill",function(d){if(d.X2013==":"  || d.X2013=="0" ){return "#555"}else{return scalecolor(d.X2013)}})
-       .style("stroke",function(d){if(d.X2013==":" || d.X2013=="0"){ return"#000" }else{ return d3.rgb(scalecolor(d.X2013)).darker()}})
+       .style("fill",function(d){if(d[Budget2013]==":"  || d[Budget2013]=="0" ){return "#555"}else{return scalecolor(d[Budget2013])}})
+       .style("stroke",function(d){if(d[Budget2013]==":" || d[Budget2013]=="0"){ return"#000" }else{ return d3.rgb(scalecolor(d[Budget2013])).darker()}})
        .on("click", mouseClick);
        
        
        function mouseClick(data) {
-       var liste, texte;
+       var liste, valeur;
        liste = document.getElementById("selecte");
-       texte = liste.options[liste.selectedIndex].text;
-       var valeur;
        valeur = document.getElementById("selecte").options[document.getElementById('selecte').selectedIndex].value;
+       
+       var liste2, texte2;
+       liste2 = document.getElementById("selecte_br");
+       var valeur2;
+       valeur2 = document.getElementById("selecte_br").options[document.getElementById('selecte_br').selectedIndex].value;
+       texte2 = valeur2+valeur
        d3.select("body").select("#info").selectAll("p").remove();
        d3.select("body").select("#info").append("p").html( function(d){
                                                           if(data[valeur]=="0"){
                                                           return data.Club + " <br /> Date cr&eacute;ation  : " + data.Date + "<br />" + "Stade : " + data.Stade + "<br /> " + texte +" : NC"
                                                           } else {
-                                                          return data.Club + " <br /> Date cr&eacute;ation  : " + data.Date + "<br />" + "Stade : " + data.Stade +  "<br /> " + texte + " : " + data[valeur] + " millions"
+                                                          return data.Club + " <br /> Classement : " + data[Classement+valeur] + " <br /> Date cr&eacute;ation  : " + data.Date + "<br />" + "Stade : " + data.Stade +  "<br /> " + texte + " : " + data[texte2] + " millions"
                                                           }
                                                           });
        }
