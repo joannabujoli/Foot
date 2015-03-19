@@ -35,7 +35,6 @@
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -58,12 +57,6 @@
                       <img src="img/ballon.png" width="20px" height="20px"/>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
-                    <li style="padding-top:13px">
-                      <img src="img/ballon.png" width="20px" height="20px"/>
-                    </li>
-                    <li>
                       <a class="page-scroll" href="#mapp">BUDGET-RECETTE</a>
                     </li>
                     <li style="padding-top:13px">
@@ -78,7 +71,12 @@
                     <li>
                       <a class="page-scroll" href="#gauge">POURCENTAGE MATCH   </a>
                     </li>
-
+                    <li style="padding-top:13px">
+                      <img src="img/ballon.png" width="20px" height="20px"/>
+                    </li>
+                    <li>
+                      <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
                 </ul>
             </div>
 
@@ -116,29 +114,6 @@
     
 <HR WIDTH=100% ALIGN="center" size=1>
 
-    <section id="contact" class="container content-section text-center">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <h2>Contactez nous </h2>
-                <img src="img/ballon.png" width="20px" height="20px"/>
-                <br /><br />
-                <p>Pour plus d'informations<br />
-                <a href="mailto:joanna.bujoli@gmail.com">joanna.bujoli@gmail.com</a>
-                </p>
-                <ul class="list-inline banner-social-buttons">
-                                      <li>
-                        <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                    </li>
-                </ul>
-                
-                <br /><br />
-                
-            </div>
-        </div>
-    </section>
-    
-<HR WIDTH=100% ALIGN="center" size=1>
-
    <center>
     <br />
     <div class="styled-select">
@@ -170,7 +145,7 @@
 </div>
  <HR WIDTH=100% ALIGN="center" size=1>
 
- <section  class="container content-section text-center">
+ <section  class="container content-section text-center"  id="chart" >
        <h2>STATISTIQUES </h2>
        <img src="img/ballon.png" width="20px" height="20px"/>
        <br /><br />
@@ -198,7 +173,7 @@
          </select>
          
          </div>
-       <div id="chart" style="text-align:center;">
+       <divstyle="text-align:center;">
        <script src="js/barchart.js"></script>
 
        </div>
@@ -207,7 +182,7 @@
  
  <HR WIDTH=100% ALIGN="center" size=1>
  
- <section  class="container content-section text-center">
+ <section  class="container content-section text-center" id="gauge">
    <h2>Pourcentage des matchs jou&eacute;s d'un club</h2>
    <img src="img/ballon.png" width="20px" height="20px"/>
    <br /><br />
@@ -282,10 +257,10 @@
                           loadLiquidFillGauge("fillgauge3", nbB, config3);
                           nbB = d[nombreB]
                           var config4 = liquidFillGaugeDefaultSettings();
-                          config4.circleColor = "#C91B58";
-                          config4.textColor = "#4F0B23";
-                          config4.waveTextColor = "#4F0B23";
-                          config4.waveColor = "#E4A0B8";
+                          config4.circleColor = "#FF0000";
+                          config4.textColor = "#B40404";
+                          config4.waveTextColor = "#B40404";
+                          config4.waveColor = "#F5A9A9";
                           config4.circleThickness = 0.3;
                           config4.textVertPosition = 0.3;
                           config4.waveAnimateTime = 1000;
@@ -294,7 +269,7 @@
                           nbC = d[nombreC]
                           d3.select("body").select("#info3").selectAll("p").remove();
                           d3.select("body").select("#info3").append("p").html( function(d){
-                                                                              return "Resultats 2013 du club " + texte2 + " : <br /> <p><span style=\"color:#42dca3;\"> Nb match gagnés: " + nbA+ "</<span><br /> <span style=\"color:#EECD3D;\"> Nb match nuls: " + nbB + " </span><br /> <span style=\"color:#C91B58;\"> Nb match perdus: " + nbC + " </span></p> ";
+                                                                              return "Resultats 2013 du club " + texte2 + " : <br /> <p><span style=\"color:#42dca3;\"> Nb match gagnés: " + nbA+ "</<span><br /> <span style=\"color:#EECD3D;\"> Nb match nuls: " + nbB + " </span><br /> <span style=\"color:#FF0000;\"> Nb match perdus: " + nbC + " </span></p> ";
                                                                               });
 
                        
@@ -312,7 +287,7 @@
  
  <br />
  
- <div style="text-align:center;" id="gauge">
+ <div style="text-align:center;" >
   <svg id="fillgauge2" width="20%" height="300"></svg>
    <svg id="fillgauge3" width="20%" height="300"></svg>
    <svg id="fillgauge4" width="20%" height="300"></svg>
@@ -335,22 +310,46 @@
       config3.waveAnimateTime = 1000;
       loadLiquidFillGauge("fillgauge3", 21.05, config3);
       var config4 = liquidFillGaugeDefaultSettings();
-      config4.circleColor = "#C91B58";
-      config4.textColor = "#4F0B23";
-      config4.waveTextColor = "#4F0B23";
-      config4.waveColor = "#E4A0B8";
+      config4.circleColor = "#FF0000";
+      config4.textColor = "#B40404";
+      config4.waveTextColor = "#B40404";
+      config4.waveColor = "#F5A9A9";
       config4.circleThickness = 0.3;
       config4.textVertPosition = 0.3;
       config4.waveAnimateTime = 1000;
       loadLiquidFillGauge("fillgauge4", 7.89, config4);
       d3.select("body").select("#info3").selectAll("p").remove();
       d3.select("body").select("#info3").append("p").html( function(d){
-                                                          return "Resultats 2013 du club PSG  : <br /> <p><span style=\"color:#42dca3;\"> Nb match gagnés: 27</<span><br /> <span style=\"color:#EECD3D;\"> Nb match nuls: 8</span><br /> <span style=\"color:#C91B58;\"> Nb match perdus: 3</span></p> ";
+                                                          return "Resultats 2013 du club PSG  : <br /> <p><span style=\"color:#42dca3;\"> Nb match gagnés: 27</<span><br /> <span style=\"color:#EECD3D;\"> Nb match nuls: 8</span><br /> <span style=\"color:#FF0000;\"> Nb match perdus: 3</span></p> ";
                                                           });
 
       </script>
  </div>
-
+ 
+ <HR WIDTH=100% ALIGN="center" size=1>
+ 
+ <section id="contact" class="container content-section text-center">
+   <div class="row">
+     <div class="col-lg-8 col-lg-offset-2">
+       <h2>Contactez nous </h2>
+       <img src="img/ballon.png" width="20px" height="20px"/>
+       <br /><br />
+       <p>Pour plus d'informations<br />
+       <a href="mailto:joanna.bujoli@gmail.com">joanna.bujoli@gmail.com</a>
+       </p>
+       <ul class="list-inline banner-social-buttons">
+         <li>
+           <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+         </li>
+       </ul>
+       
+       <br /><br />
+       
+     </div>
+   </div>
+ </section>
+ 
+ <HR WIDTH=100% ALIGN="center" size=1>
     <footer>
         <div class="container text-center">
             <p>Copyright &copy; Joanna B. 2015</p>
