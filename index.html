@@ -8,24 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Tcherina, Olivier, Joanna">
-      
-      <script src="http://d3js.org/d3.v3.min.js"></script>
-      <script src="http://d3js.org/queue.v1.min.js"></script>
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-      <script src="js/liquidFillGauge.js" language="JavaScript"></script>
-      <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-      <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-        
-        <style>
-          .liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
-          </style>
-        
+
+    <script src="js/d3.v3.min.js"></script>
+    <script src="js/queue.v1.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/liquidFillGauge.js" language="JavaScript"></script>
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+ 
     <title>Ligue 1 - Evolution des principaux clubs</title>
     
     <link rel="icon" href="img/ballon.png" />
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/grayscale.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -41,9 +38,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                    </div>
-
-
+            </div>
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
           
@@ -53,26 +48,26 @@
                     <li>
                         <a class="page-scroll" href="#about">A PROPOS</a>
                     </li>
-                    <li style="padding-top:13px">
-                      <img src="img/ballon.png" width="20px" height="20px"/>
+                    <li class="hideBall paddingTop">
+                      <img src="img/ballon.png" class="ball"/>
                     </li>
                     <li>
                       <a class="page-scroll" href="#carte">BUDGET-RECETTE</a>
                     </li>
-                    <li style="padding-top:13px">
-                      <img src="img/ballon.png" width="20px" height="20px"/>
+                    <li class="hideBall paddingTop">
+                      <img src="img/ballon.png" class="ball"/>
                     </li>
                     <li>
-                      <a class="page-scroll" href="#chart">STATISTIQUES </a>
+                      <a class="page-scroll" href="#chart">STATISTIQUES</a>
                     </li>
-                    <li style="padding-top:13px">
-                      <img src="img/ballon.png" width="20px" height="20px"/>
+                    <li class="hideBall paddingTop">
+                      <img src="img/ballon.png" class="ball"/>
                     </li>
                     <li>
-                      <a class="page-scroll" href="#gauge">POURCENTAGE MATCH   </a>
+                      <a class="page-scroll" href="#gauge">POURCENTAGE MATCH</a>
                     </li>
-                    <li style="padding-top:13px">
-                      <img src="img/ballon.png" width="20px" height="20px"/>
+                    <li class="hideBall paddingTop">
+                      <img src="img/ballon.png" class="ball"/>
                     </li>
                     <li>
                       <a class="page-scroll" href="#contact">Contact</a>
@@ -115,74 +110,71 @@
 <HR WIDTH=100% ALIGN="center" size=1>
 
    <center>
-    <br />
-    <div class="styled-select" id="carte">
-      <h2>BUDGETS ET RECETTES SPONSORING </h2>
- <div class="styled-select">
-   <select  id ="selecte" onchange="update(this.value)">
-     <option class="select-dash" disabled="disabled">Ann&eacute;es</option>
-     <option value="2009" >2009</option>
-     <option value="2010" >2010</option>
-     <option value="2011">2011</option>
-     <option value="2012" >2012</option>
-     <option value="2013" selected="selected">2013</option>
-   </select>
+   <br/>
+   <div class="styled-select" id="carte">
+		<h2>BUDGETS ET RECETTES SPONSORING </h2>
+		<div class="styled-select">
+			<select  id ="selecte" onchange="update(this.value)">
+				<option class="select-dash" disabled="disabled">Ann&eacute;es</option>
+				<option value="2009" >2009</option>
+				<option value="2010" >2010</option>
+				<option value="2011">2011</option>
+				<option value="2012" >2012</option>
+				<option value="2013" selected="selected">2013</option>
+			</select>
+			   
+			<select  id ="selecte_br" onchange="update(this.value)">
+				<option class="select-dash" disabled="disabled">Budget/Recette</option>
+				<option value="Budget" selected="selected">Budget  </option>
+				<option value="Recette">Recette</option>
+			</select>
+		   
+		</div>
+		<br/><br/>
+	</div>
+    </center>
    
-   <select  id ="selecte_br" onchange="update(this.value)">
-     <option class="select-dash" disabled="disabled">Budget/Recette</option>
-     <option value="Budget" selected="selected">Budget  </option>
-     <option value="Recette">Recette</option>
-   </select>
+   <div id="info" class="infoGraph"> <span  style="color:#42dca3;">Informations sur le club : <br /></span></div>
    
- </div>
- <br /><br />
-  </div>
-      </center>
-   
-   <div id="info" style="color:#FFF; font-size:20px;width:auto; height:170px;position:absolute;left:10px"> <span  style="color:#42dca3;">Informations sur le club : <br /></span></div>
-   
-   <br />
-   
- <div style="text-align:center;" id="mapp">
-   
- <script src="js/card.js"></script>
-    
-</div>
- <HR WIDTH=100% ALIGN="center" size=1>
+	<br/>
+	<div style="text-align:center;" id="mapp">
+		<script src="js/card.js"></script>
+	</div>
 
- <section  class="container content-section text-center"  id="chart" >
-       <h2>STATISTIQUES </h2>
-       <img src="img/ballon.png" width="20px" height="20px"/>
-       <br /><br />
-       <div id="info2" style="color:#FFF; font-size:20px;width:auto; height:370px;position:absolute;left:10px;"> <span  style="color:#42dca3;">Informations sur le club : <br /></span></div>
-       <div class="styled-select">
-       </div>
+<HR WIDTH=100% ALIGN="center" size=1>
+
+<section  class="container content-section text-center"  id="chart" >
+    <h2>STATISTIQUES </h2>
+    <img src="img/ballon.png" width="20px" height="20px"/>
+    <br/><br/>
+    <div id="info2" class="infoGraph"> <span  style="color:#42dca3;">Informations sur le club : <br /></span></div>
+    <div class="styled-select">
+    </div>
        
-       <div class="styled-select">
-         <select  id ="selecte1" onchange="update2(this.value)">
-           <option class="select-dash" disabled="disabled">Ann&eacute;es</option>
-           <option value="2009" >2009</option>
-           <option value="2010" >2010</option>
-           <option value="2011">2011</option>
-           <option value="2012" >2012</option>
-           <option value="2013" selected="selected">2013</option>
-         </select>
+    <div class="styled-select">
+        <select  id ="selecte1" onchange="update2(this.value)">
+			<option class="select-dash" disabled="disabled">Ann&eacute;es</option>
+			<option value="2009" >2009</option>
+			<option value="2010" >2010</option>
+			<option value="2011">2011</option>
+			<option value="2012" >2012</option>
+			<option value="2013" selected="selected">2013</option>
+        </select>
          
-         <select  id ="selecte2" onchange="update2(this.value)">
-           <option class="select-dash" disabled="disabled">Variables </option>
-           <option value="points" selected="selected">Points</option>
+        <select  id ="selecte2" onchange="update2(this.value)">
+			<option class="select-dash" disabled="disabled">Variables </option>
+			<option value="points" selected="selected">Points</option>
             <option value="joues">Nb matchs jou&eacute;s</option>
-           <option value="Affluence">Affluence</option>
-              <option value="marques">Nb buts marqu&eacute;s</option>
-               <option value="encaisses">Nb buts encaiss&eacute;s</option>
-         </select>
+			<option value="Affluence">Affluence</option>
+            <option value="marques">Nb buts marqu&eacute;s</option>
+            <option value="encaisses">Nb buts encaiss&eacute;s</option>
+        </select>
          
-         </div>
-       <divstyle="text-align:center;">
-       <script src="js/barchart.js"></script>
-
-       </div>
-      <br /><br />
+    </div>
+    <div style="text-align:center;">
+		<script src="js/barchart.js"></script>
+    </div>
+    <br/><br/>
  </section>
  
  <HR WIDTH=100% ALIGN="center" size=1>
@@ -191,7 +183,7 @@
    <h2>Pourcentage des matchs jou&eacute;s d'un club</h2>
    <img src="img/ballon.png" width="20px" height="20px"/>
    <br /><br />
-   <div id="info3" style="color:#FFF; font-size:20px;width:auto; height:370px;position:absolute;left:10px;"> <span  style="color:#42dca3;">Informations sur le club : <br /><br /></span></div>
+   <div id="info3" class="infoGraph"> <span  style="color:#42dca3;">Informations sur le club : <br /><br /></span></div>
    
  <div class="styled-select">
  <select  id ="selecte3" onchange="update3(this.value)">
@@ -330,6 +322,7 @@
 
       </script>
  </div>
+ </section>
  
  <HR WIDTH=100% ALIGN="center" size=1>
  
@@ -340,7 +333,9 @@
        <img src="img/ballon.png" width="20px" height="20px"/>
        <br /><br />
        <p>Pour plus d'informations<br />
-       <a href="mailto:joanna.bujoli@gmail.com">joanna.bujoli@gmail.com</a>
+       <a href="mailto:joanna.bujoli@gmail.com">joanna.bujoli@gmail.com</a><br/>
+	   <a href="mailto:joanna.bujoli@gmail.com">olivier_nguyen@live.fr</a><br/>
+	   <a href="mailto:joanna.bujoli@gmail.com">tguilon@etud.u-pem.fr</a>
        </p>
        <ul class="list-inline banner-social-buttons">
          <li>
