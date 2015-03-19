@@ -1,0 +1,50 @@
+#table_club td {
+  width:300px;
+  text-align:left;
+  padding-bottom:10px;
+}
+
+#table_club tr {
+  margin-bottom:100px;
+  padding-bottom:10px;
+}
+
+.infoGraph {
+	color:#FFF; 
+	font-size:20px;
+	width:auto; 
+	position:absolute;
+	left:10px;
+}
+
+.liquidFillGaugeText { 
+	font-family: Helvetica; 
+	font-weight: bold; 
+}
+
+.ball {
+	width: 20px;
+	height: 20px;
+	padding: 3px;
+}
+
+.paddingTop {
+	padding-top:13px;
+}
+
+@media (max-width: 1200px) {
+	.infoGraph {
+		color:#fff; 
+		font-size:20px;
+		width:auto; 
+		position : relative !important;
+		left:10px;
+		text-align:center;
+	}
+}
+
+@media (max-width: 767px) {
+	.hideBall {
+		display: none !important;
+	}
+}
