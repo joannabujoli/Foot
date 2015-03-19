@@ -1,3 +1,9 @@
+#table_club td {
+  margin-bottom:20px;
+  width:300px;
+  text-align:left;
+}
+
 
 .infoGraph {
 	color:#FFF; 

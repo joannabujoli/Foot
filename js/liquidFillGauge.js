@@ -191,3 +191,4 @@ function loadLiquidFillGauge(elementId, value, config) {
           });
   }
 }
+

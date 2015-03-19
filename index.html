@@ -102,7 +102,65 @@
                 <h2>A PROPOS DE NOTRE PROJET</h2>
                   <img src="img/ballon.png" width="20px" height="20px"/>
                   <br /><br />
-                <p>Projet d'évolution des clubs de Ligue 1 :  liste des clubs, variables et ann&eacute;es</p>
+                <p> Notre projet porte sur 31 clubs de Ligue 1, chacun &eacute;tant &eacute;tudi&eacute; sur 12 variables diff&eacute;rentes entre les ann&eacute;es 2009 et 2013. </p>
+                <p>La liste des 31 clubs regroupe toutes les équipes ayant été en Ligue 1 entre les ann&eacute;es 2009 et 2013 :
+                <table id="table_club">
+                  <tr>
+                    <td><img src="img/olympique_lyonnais.png" width="50px" height="60px"/> Olympique Lyonnais    </td>
+                    <td><img src="img/olympique_marseille.png" width="50px" height="60px"/> Olympique de Marseille   </td>
+                    <td><img src="img/bordeaux.png" width="50px" height="60px"/> FC Girondins de Bordeaux   </td>
+                    </tr>
+                  <tr>
+                      <td><img src="img/psg.png" width="50px" height="50px"/> Paris Saint Germain  </td>
+                      <td><img src="img/monaco.png" width="50px" height="70px"/> AS Monaco FC  </td>
+                      <td><img src="img/lille.png" width="50px" height="70px"/> Lille OSC  </td>
+                  </tr>
+                  <tr>
+                    <td><img src="img/saint_etienne.png" width="50px" height="70px"/> AS Saint-Etienne  </td>
+                    <td><img src="img/stade_rennais.png" width="50px" height="60px"/> Stade Rennais FC</td>
+                    <td><img src="img/sochaux.png" width="50px" height="60px"/> FC Sochaux </td>
+                  </tr>
+                  <tr>
+                    <td><img src="img/nancy.png" width="50px" height="60px"/> AS Nancy-Lorraine </td>
+                    <td><img src="img/nice.png" width="50px" height="60px"/> OGC Nice </td>
+                    <td><img src="img/valenciennes.png" width="50px" height="60px"/> Valenciennes FC</td>
+                  </tr>
+                  <tr>
+                    <td><img src="img/le_mans.png" width="50px" height="60px"/> Le Mans UC 72 </td>
+                    <td><img src="img/lens.png" width="50px" height="60px"/> RC LENS </td>
+                    <td><img src="img/lorient.png" width="50px" height="60px"/> FC Lorient</td>
+                  </tr>
+                  <tr>
+                    <td><img src="img/grenoble.svg" width="50px" height="60px"/> Grenoble Foot 38 </td>
+                    <td><img src="img/auxerre.png" width="50px" height="60px"/> AJ Auxerre </td>
+                    <td><img src="img/montpellier.png" width="50px" height="50px"/> Montpellier HSC</td>
+                  </tr>
+                  <tr>
+                    <td><img src="img/boulogne.png" width="50px" height="60px"/> US Boulogne</td>
+                    <td><img src="img/toulouse.png" width="50px" height="50px"/> Toulouse FC </td>
+                    <td><img src="img/caen.png" width="50px" height="50px"/> Stade Malherbe Caen</td>
+                  </tr>
+                  <tr>
+                    <td><img src="img/stade_brestois.png" width="50px" height="60px"/> Stade Brestois</td>
+                    <td><img src="img/avignon.png" width="50px" height="60px"/> Arles-Avignon </td>
+                    <td><img src="img/evian.png" width="50px" height="60px"/> Evian</td>
+                  </tr>
+                  <tr>
+                    <td><img src="img/dijon.png" width="50px" height="60px"/> Dijon</td>
+                    <td><img src="img/ajaccio.png" width="50px" height="60px"/> AC Ajaccio  </td>
+                    <td><img src="img/reims.png" width="50px" height="50px"/>Reims</td>
+                  </tr>
+                  <tr>
+                    <td><img src="img/bastia.png" width="50px" height="60px"/> Bastia</td>
+                    <td><img src="img/troyes.png" width="50px" height="60px"/>Troyes </td>
+                    <td><img src="img/nantes.png" width="50px" height="50px"/>FC Nantes</td>
+                  </tr>
+                  <tr>
+                    <td><img src="img/guingamp.png" width="50px" height="60px"/> EA Guingamp</td>
+                  </Tr>
+                </table>
+                </p>
+                <p> Les variables <i>Recette</i> et <i>Budget</i> sont pr&eacute;sent&eacute;es sous forme de cercle sur une carte de France que vous pouvez trouver dans la section  <a class="page-scroll" href="#mapp">CARTE DE FRANCE  </a>.<br/> Vous pouvez &eacute;tudier les variables <i>Points, Nombres de matchs jou&eacute;s, Nombres de buts encaiss&eacute;s et Nombres de buts marqu&eacute;s </i>dans la section <a class="page-scroll" href="#barchart">STATISTIQUES </a> que l'on vous pr&eacute;sente sous forme de diagramme à barres.</br /> Enfin, pour visualiser les pourcentages de <i>r&eacute;ussites</i> et <i>d&eacute;faites</i> de chaque club, veuillez vous reporter en section <a class="page-scroll" href="#gauge">POURCENTAGES</a>.</p>
             </div>
         </div>
     </section>
@@ -180,7 +238,7 @@
  <HR WIDTH=100% ALIGN="center" size=1>
  
  <section  class="container content-section text-center" id="gauge">
-   <h2>Pourcentage des matchs jou&eacute;s d'un club</h2>
+   <h2>Pourcentages des matchs jou&eacute;s d'un club</h2>
    <img src="img/ballon.png" width="20px" height="20px"/>
    <br /><br />
    <div id="info3" class="infoGraph"> <span  style="color:#42dca3;">Informations sur le club : <br /><br /></span></div>
@@ -202,7 +260,8 @@
            var min = 1,
            max = 31,
            select = document.getElementById('selecte_affluence');
-
+          
+           //liste select des clubs dans le fichier de donnees
            data.forEach(function(d) {
                         var opt = document.createElement('option');
                         opt.value = d.club
@@ -212,26 +271,37 @@
                         });
            });
            
+    //fonction update des pourcentages
    var update3 = function(feature){
+     
+     //on enleve d'abord les données précédentes
      d3.select("#fillgauge2").selectAll("g").remove();
       d3.select("#fillgauge3").selectAll("g").remove();
        d3.select("#fillgauge4").selectAll("g").remove();
-     var liste, texte,val;
+      
+    //on réccupère les options sélectionnées
+     var liste, texte,val, liste2, texte2;
+     
      liste = document.getElementById("selecte3");
      texte = document.getElementById("selecte3").options[document.getElementById('selecte3').selectedIndex].value;
      val = liste.options[liste.selectedIndex].text;
-     var liste2, texte2;
      liste2= document.getElementById("selecte_affluence");
      texte2 = document.getElementById("selecte_affluence").options[document.getElementById('selecte_affluence').selectedIndex].value;
+     
      d3.csv("bar-data.csv",function(error, data) {
             Data = data
             var nombreA, nombreB, nombreC
              data.forEach(function(d) {
+                          //si le club selectionné corresponds a celui dans le data
                           if(d.club== texte2){
+                          
+                          //variables servant à réccuperer les données
                           nombreA= "gagnes"+texte
                           nombreB = "nuls"+texte
                           nombreC = "perdus"+texte
-                            var config1 = liquidFillGaugeDefaultSettings();
+                          
+                          //cercle de donnees match gagnés
+                          var config1 = liquidFillGaugeDefaultSettings();
                           config1.circleColor = "#42dca3";
                           config1.textColor = "#0B4F36";
                           config1.waveTextColor = "#0B4F36";
@@ -242,6 +312,8 @@
                             var nbA = (d[nombreA]/38)*100
                             loadLiquidFillGauge("fillgauge2", nbA, config1);
                           nbA = d[nombreA]
+                          
+                          //cercle de donnees matchs nuls
                           var config3 = liquidFillGaugeDefaultSettings();
                           config3.circleColor = "#EECD3D";
                           config3.textColor = "#867218";
@@ -253,6 +325,8 @@
                           var nbB = (d[nombreB]/38)*100
                           loadLiquidFillGauge("fillgauge3", nbB, config3);
                           nbB = d[nombreB]
+                          
+                          //cercle de donnees match perdus
                           var config4 = liquidFillGaugeDefaultSettings();
                           config4.circleColor = "#FF0000";
                           config4.textColor = "#B40404";
@@ -264,6 +338,8 @@
                           var nbC = (d[nombreC]/38)*100
                           loadLiquidFillGauge("fillgauge4", nbC, config4);
                           nbC = d[nombreC]
+                          
+                          //remplace le texte dans la div info lors du changement de variables
                           d3.select("body").select("#info3").selectAll("p").remove();
                           d3.select("body").select("#info3").append("p").html( function(d){
                                                                               return "Resultats 2013 du club " + texte2 + " : <br /> <p><span style=\"color:#42dca3;\"> Nb match gagnés: " + nbA+ "</<span><br /> <span style=\"color:#EECD3D;\"> Nb match nuls: " + nbB + " </span><br /> <span style=\"color:#FF0000;\"> Nb match perdus: " + nbC + " </span></p> ";
@@ -288,7 +364,8 @@
   <svg id="fillgauge2" width="20%" height="300"></svg>
    <svg id="fillgauge3" width="20%" height="300"></svg>
    <svg id="fillgauge4" width="20%" height="300"></svg>
-    <script>var config1 = liquidFillGaugeDefaultSettings();
+    <script>
+      var config1 = liquidFillGaugeDefaultSettings();
       config1.circleColor = "#42dca3";
       config1.textColor = "#0B4F36";
       config1.waveTextColor = "#0B4F36";
@@ -334,8 +411,8 @@
        <br /><br />
        <p>Pour plus d'informations<br />
        <a href="mailto:joanna.bujoli@gmail.com">joanna.bujoli@gmail.com</a><br/>
-	   <a href="mailto:joanna.bujoli@gmail.com">olivier_nguyen@live.fr</a><br/>
-	   <a href="mailto:joanna.bujoli@gmail.com">tguilon@etud.u-pem.fr</a>
+	   <a href="mailto:olivier_nguyen@live.fr">olivier_nguyen@live.fr</a><br/>
+	   <a href="mailto:tguilon@etud.u-pem.fr">tguilon@etud.u-pem.fr</a>
        </p>
        <ul class="list-inline banner-social-buttons">
          <li>
