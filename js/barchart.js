@@ -7,7 +7,7 @@ liste1 = document.getElementById("selecte1");
 texte1 = liste.options[liste.selectedIndex].text;
 
 
-var margin = {top: 20, right: 20, bottom: 115, left: 100},
+var margin = {top: 20, right: 20, bottom: 125, left: 100},
 width = 960 - margin.left - margin.right,
 height = 600 - margin.top - margin.bottom;
 
