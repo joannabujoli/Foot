@@ -1,3 +1,14 @@
+  #legend{
+    position:absolute;
+    text-align:right;
+    left:50px;
+    width:auto;
+}
+
+li{
+  list-style-type: none;
+}
+
 #table_club td {
   width:300px;
   text-align:left;

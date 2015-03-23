@@ -14,8 +14,8 @@ var svg = d3.select("body").select("#mapp").append("svg").attr("id",chart).attr(
 // echelle pour les cercles
 var scalecircle = d3.scale.sqrt().range([0, 15]).domain([0,30])
 
-// echelle de couleur aussi facile
-var scalecolor = d3.scale.linear().range(["#fff","#f22"]).domain([0,30])
+// echelle de couleur
+var scalecolor = d3.scale.quantize().range(colorbrewer.Reds[4]).domain([0,100])
 
 // projection
 var projection = d3.geo.mercator()
@@ -25,7 +25,7 @@ var projection = d3.geo.mercator()
 
 
 var aspect = 850 / 650,
-chart = $("#chart");
+chart = $("#mapp");
 //fonction resize fenetre
 $(window).on("resize", function() {
              var targetWidth = chart.parent().width();
@@ -93,6 +93,19 @@ queue()
        
        })
 
+var cols = colorbrewer.Reds[4]
+
+// creation de la légende
+var legend="<h4>Taux de chomâge</h4><ul>"
+for(i=0;i<cols.length;i++){
+  var bornes=scalecolor.invertExtent(cols[i])
+  legend+="<li> <span style='color:"+cols[i]+";font-size:1.5em'>&#9632;</span> [" + d3.round(bornes[0],1)+", "+ d3.round(bornes[1],1)+"]</li>"
+}
+legend+="</ul>"
+console.log(legend)
+
+// ajout de la légende
+d3.select("#mapp").append("div").attr("id","legend").html(legend);
 
 //fonction de mise a jour
 var update = function(feature){
