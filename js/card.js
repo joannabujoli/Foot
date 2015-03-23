@@ -96,7 +96,7 @@ queue()
 var cols = colorbrewer.Reds[4]
 
 // creation de la légende
-var legend="<h4>Taux de chomâge</h4><ul>"
+var legend="<h4>Taux</h4><ul>"
 for(i=0;i<cols.length;i++){
   var bornes=scalecolor.invertExtent(cols[i])
   legend+="<li> <span style='color:"+cols[i]+";font-size:1.5em'>&#9632;</span> [" + d3.round(bornes[0],1)+", "+ d3.round(bornes[1],1)+"]</li>"
