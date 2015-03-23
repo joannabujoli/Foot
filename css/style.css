@@ -1,8 +1,8 @@
   #legend{
-    position:absolute;
     text-align:right;
-    left:50px;
+    margin-right:50px;
     width:auto;
+    bottom:1px;
 }
 
 li{
